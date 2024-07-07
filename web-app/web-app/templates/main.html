@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <style>
+    body {
+ margin: 0;
+ height: 100vh;
+ overflow: hidden;
+}
+
+.loading_cont {
+ width: 100%;
+ height: 100%;
+ background: black;
+ background: -webkit-linear-gradient(left top, #141A24, #1F2125);
+ background: -o-linear-gradient(bottom right, #141A24, #1F2125);
+ background: -moz-linear-gradient(bottom right, #141A24, #1F2125);
+ background: linear-gradient(to bottom right, #141A24, #1F2125);
+}
+
+.loading_cont:before {
+ content: "";
+ position: absolute;
+ width: 100%;
+ height: 100%;
+ left: 0;
+ top: 0px;
+ background: url(https://next.atcom.gr/StaticData/Landing2017/Content/Media/dots-transparent.png) repeat scroll center center;
+ opacity: 0.05;
+ z-index: 0;
+}
+
+#loader {
+	display: inline-block;
+	position: relative;
+	width: 800px;
+	height: 800px;
+	top: 50%;
+	left: 50%;
+	margin-left: -400px;
+	margin-top: -400px;
+}
+
+rect {
+ -webkit-transform-origin: 50% 50%;
+ transform-origin: 50% 50%;
+}
+
+.blobs {
+ -webkit-filter: url("#goo");
+ filter: url("#goo");
+}
+
+.blob {
+	fill: white;
+}
+    </style>
+    <meta charset="utf-8">
+    <title>Viktorina.com</title>
+    </head>
+    <body>
+    <p>Викторина на тему "то или то"</p>
+    </body>
+    </html>
+<head>
+    <title>Сайт</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+</head>
+
+<body>
+    <div class="loading_cont">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" id="loader">
+            <defs>
+                <filter id="goo">
+                    <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10" />
+                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
+                    <feBlend in2="goo" in="SourceGraphic" result="mix" />
+                </filter>
+                <linearGradient id="MyGradient">
+                        <stop offset="5%"  stop-color="#40204c"/>
+                        <stop offset="40%" stop-color="#a3225c"/>
+                        <stop offset="100%" stop-color="#e24926"/>
+                </linearGradient>
+            </defs>
+            <mask id="maska">
+                <g class="blobs">
+                    <circle class="blob" cx="440" cy="250" r="30" transform="rotate(0) translate(0, 0) rotate(0)"/>
+                    <circle class="blob" cx="500" cy="320" r="70"  transform="rotate(0) translate(0, 0) rotate(0)"/>
+                    <circle class="blob" cx="300" cy="390" r="40"  transform="rotate(0) translate(0, 0) rotate(0)"/>
+                    <circle class="blob" cx="380" cy="390" r="80"  transform="rotate(0) translate(0, 0) rotate(0)"/>
+                    <circle class="blob" cx="470" cy="450" r="20"  transform="rotate(0) translate(0, 0) rotate(0)"/>
+                </g>
+            </mask>
+            <rect x="200" y="200"  mask="url(#maska)" fill="url(#MyGradient)" width="400" height="400">
+        </svg>	
+    </div>
+    <script>
+        var radius = 8;
+TweenMax.staggerFromTo('.blob', 4 , {
+	cycle: {
+		attr: function (i) {
+			var r = i * 90;
+			return {
+				transform: 'rotate('+r+') translate('+radius+', 0.1) rotate('+(-r)+')'
+			}
+		}
+	}
+},
+{
+	cycle: {
+		attr: function (i) {
+			var r = i * 90 + 360;
+			return {
+				transform: 'rotate('+r+') translate('+radius+', 0.1) rotate('+(-r)+')'
+			}      
+		}
+	},
+	ease: Linear.easeNone,
+	repeat: -1
+});
+
+    </script>
+    <form method="post" action="test">
+        <p>
+            <b>Имя:</b>
+            <input type="text" maxlength="25" size="25" name="first_name">
+        </p>
+
+        <p>
+            <b>Фамилия:</b>
+            <input type="text" maxlength="25" size="25" name="last_name">
+        </p>
+
+        <p><b>Какой цветок всю жизнь любуется собой?:</b> </p>
+        <p><input type="radio" name="gender" value="1">пион</p>
+        <p><input type="radio" name="gender" value="2">одуванчик</p>
+        <p><input type="radio" name="gender" value="3">подснежник</p>
+        <p><input type="radio" name="gender" value="4">нарцисс</p>
+        <p><input type="radio" name="gender" value="5">роза</p>
+
+        <p>
+            <b>Где живет кенгуру?:</b>
+            <select name="cites">
+                <option value="Северный полюс">Северный полюс</option>
+                <option value="Антарктида">Антарктида</option>
+                <option value="Африка">Африка</option>
+                <option value="Австралия">Австралия</option>
+                <option value="Украина">Украина</option>
+                <option value="Япония">Япония</option>
+            </select>
+        </p>
+
+        <p><b>Какой зверь после еды чистит зубы?:</b></p>
+        <p><input type="checkbox" name="color" value="Тигр">Тигр</p>
+        <p><input type="checkbox" name="color" value="Лось">Лось</p>
+        <p><input type="checkbox" name="color" value="Чебурашка">Чебурашка</p>
+        <p><input type="checkbox" name="color" value="Лев">Лев</p>
+
+        <p>
+        
+        <p><b>У кого шея имеет больше позвонков у жирафа или у свиньи?:</b></p>
+        <p><input type="checkbox" name="color" value="У свиньи">У свиньи</p>
+        <p><input type="checkbox" name="color" value="У жирафа">У жирафа</p>
+        <p><input type="checkbox" name="color" value="И у того и у другого">И у того и у другого</p>
+
+        </p>
+            <input type="submit" value="Отправить на проверку">
+            <input type="reset" value="Очистить">
+        </p>
+
+
+    </form>
+</body>
+
+</html>

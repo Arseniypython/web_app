@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Сайт</title>
+</head>
+
+<body>
+    <p>
+        {{post}}
+        {{obj['first_name']}}
+    </p>
+    <p>
+        {{obj['last_name']}}
+    </p>
+    <p>
+        {% for color in obj['color'] %}
+        <p>
+            {{color}}
+        </p>
+        {% endfor %}
+    </p>
+</body>
+
+</html>
